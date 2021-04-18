@@ -1,0 +1,72 @@
+  m=
+     1000
+
+  n=
+     2000
+
+  difa=
+    +6.66134e-16
+
+  difb=
+    -5.47340e-14
+
+  bedge=
+    +1.09863e+00
+
+  chk0=
+    +2.28708e-16
+
+  chk0=
+    +4.97355e-16
+
+  chk0=
+    +7.26064e-16
+
+  xyz=
+    +1.37991e+00    +1.25236e+00    +1.09676e+00
+
+  xyz=
+    +1.37991e+00    +1.25236e+00    +1.09676e+00
+
+  chk0=
+    +3.18887e-11
+
+  edge,observed=
+    +1.08676e+00
+
+  edge,exact=
+    +1.09863e+00
+
+  relative error=
+    -1.08058e-02
+
+  lambda,observed=
+    +1.99439e+00
+
+  lambda,exact=
+    +2.01843e+00
+
+  relative error=
+    -1.19083e-02
+
+  cosine,observed=
+    +9.44706e-01
+
+  cosine,exact=
+    +9.38079e-01
+
+  relative error=
+    +7.06438e-03
+
+  cosine,observed=
+    +9.09189e-01
+
+  cosine,exact=
+    +9.01518e-01
+
+  relative error=
+    +7.06438e-03
+
+  chk0, backwards mapping=
+    +3.10862e-15
+

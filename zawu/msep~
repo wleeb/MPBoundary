@@ -1,0 +1,4 @@
+  fname="mpbdry.m"
+  fkey="mpbdry_"
+  msep.pl "$fname" "$fkey"
+

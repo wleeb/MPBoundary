@@ -13,6 +13,8 @@
 %        specified value lambda
 %     mpbdry_edge - evaluates the asymptotic operator norm squared of the random 
 %        matrix N
+%     mpbdry_thresh - evaluates the asymptotic operator norm squared of the random 
+%        matrix N and the minimum detectable signal eigenvalue
 %     mpbdry_sback - evaluates population parameters for spiked matrix 
 %        model; from observed value to population value
 %     mpbdry_sforw - evaluates population parameters for spiked matrix 
@@ -23,6 +25,7 @@
 %        Among these routines are:
 %
 %     mpbdry_evalqder2 - evaluate first and second derivatives of Q
+%     mpbdry_fmin - evaluates the minimum of F
 %     mpbdry_fminder - evaluates the derivative of the minimum of F
 %     mpbdry_evalfmix - evaluates second and mixed derivatives of F
 %     mpbdry_evalfg3 - evaluates all derivatives up to third order of both

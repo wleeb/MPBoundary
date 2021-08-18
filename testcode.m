@@ -1,6 +1,11 @@
         function main
         prini(13,1);
 %
+
+        test444();
+        prinstop;
+
+
         randn(1,1000);
 
         m=1000;
@@ -41,7 +46,7 @@
         [y,x,ep,u,v] = genspiket(ells,m,n,krank,as,awhts,bs,bwhts);
 
 
-        [uy,sy,vy] = svshr_svdsmart(y,m,n,krank);
+        [uy,sy,vy] = svdsmart(y,m,n,krank);
 
 
         chk0 = norm(y*vy - uy*diag(sy),'fro') / norm(sy,'fro');
@@ -116,6 +121,107 @@
 
 
         prinstop;
+        end
+%
+%
+%
+%
+%
+        function test444()
+
+        m=100;
+        n=2000;
+
+        prinf('m=',m,1);
+        prinf('n=',n,1);
+
+        gam = m / n;
+
+        as = rand(1,m);
+        bs = rand(1,n);
+
+        awhts=ones(1,m);
+        awhts = awhts / sum(awhts);
+        bwhts=ones(1,n);
+        bwhts = bwhts / sum(bwhts);
+
+
+        difa = sum(awhts) - 1;
+        difb = sum(bwhts) - 1;
+        prin2('difa=',difa,1);
+        prin2('difb=',difb,1);
+
+%%%        prinstop;
+
+%%%        prin2('as=',as,10);
+%%%        prin2('bs=',bs,10);
+
+
+%%%        as=ones(1,m);
+%%%        bs=ones(1,n);
+
+        [ell,bedge,err] = mpbdry_thresh(as,bs,awhts,bwhts,m,n,gam);
+        ell2 = mpbdry_sback(bedge,as,bs,awhts,bwhts,m,n,gam);
+
+        dif = (ell-ell2)/ell2;
+        prin2('dif=',dif,1);
+
+        prin2('fval, should be zero=',err,1);
+
+        prinstop;
+        end
+%
+%
+%
+%
+%
+        function [s,sder,evar,eder,gval,gder,gderl] = stielauto(rlam,...
+            as,bs,awhts,bwhts,m,n,gam)
+%
+%         evaluates the Stieltjes transform using fzero (MATLAB root-finding
+%         method).
+%
+
+        if (size(as,1) ~= 1)
+%
+        as = as';
+    end
+%
+        if (size(bs,1) ~= 1)
+%
+        bs = bs';
+    end
+%
+        if (size(awhts,1) ~= 1)
+%
+        awhts = awhts';
+    end
+%
+        if (size(bwhts,1) ~= 1)
+%
+        bwhts = bwhts';
+    end
+
+        deps = mpbdry_machzero();
+%%%        tol=100*deps;
+        tol=sqrt(deps)/10;
+
+        feval = @(x) mpbdry_evalf(x,rlam,as,bs,...
+            awhts,bwhts,m,n,gam,0);
+        evar = fzero(feval,[-1/gam/max(bs)+tol,-tol]);
+
+        [fval,fder,gval,gder,fdlam] = mpbdry_evalfg(evar,rlam,as,bs,awhts,...
+            bwhts,m,n,gam);
+
+        eder = -fdlam / fder;
+        gderl = gder * eder;
+%
+%        evaluate the stieltjes transform and derivative
+%
+        s = sum(1 ./ (gval*as-rlam).*awhts);
+        sder = -sum(awhts.*(gderl*as - 1) ./ (gval*as - rlam).^2);
+
+
         end
 %
 %
@@ -250,7 +356,7 @@
 %
 %
 %
-        function [u,s,v] = svshr_svdsmart(a,m,n,k)
+        function [u,s,v] = svdsmart(a,m,n,k)
 %
         if (m/k > 20)
 %

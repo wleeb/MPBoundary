@@ -1,5 +1,4 @@
-        function [rlam,cout,cinn] = mpbdry_sforw(ell,as,bs,...
-            awhts,bwhts,m,n,gam)
+        function [rlam,cout,cinn] = mpbdry_sforw(ell,as,bs,awhts,bwhts,m,n,gam)
 %
 %                            description:
 %
@@ -8,7 +7,7 @@
 %                          Y = X + N                               (1)
 %
 %   where X is a low rank matrix and N = A^{1/2} G B^{1/2} has separable
-%   variance profile. Returns asymptotic eigenvalue of YYT^T and angles
+%   variance profile. Returns asymptotic eigenvalue of YY^T and angles
 %   between singular vectors of X and Y.
 %
 %                           input parameters:
